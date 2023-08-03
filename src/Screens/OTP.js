@@ -23,7 +23,7 @@ const OTP = ({ data, navigation }) => {
       navigation.navigate("Home");
     } else {
       Alert.alert("Error", "Wrong OTP");
-      setModalVisible(false);
+      // setModalVisible(false);
     }
   };
 

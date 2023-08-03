@@ -5,24 +5,25 @@ import axios from "axios";
 import { encode } from "base-64";
 import { COLOURS } from "../constants/Theme";
 import OTP from "./OTP";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+// import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Login = ({ navigation }) => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [flag, setFlag] = useState(false);
   const [data, setData] = useState("");
-  const [signUpNumber,setSignUpNumber] = useState('')
+  // console.log(phoneNumber, typeof phoneNumber);
+  // const [signUpNumber,setSignUpNumber] = useState('')
   // console.log(signUpNumber,phoneNumber)
 
-  const getUserData = async () => {
-    const res = await AsyncStorage.getItem("user-data");
-    const data = JSON.parse(res);
-    setSignUpNumber(`+91${data.number}`)
-    // console.log(res)
-  };
-  useEffect(() => {
-    getUserData();
-  }, [signUpNumber]);
+  // const getUserData = async () => {
+  //   const res = await AsyncStorage.getItem("user-data");
+  //   const data = JSON.parse(res);
+  //   // setSignUpNumber(`+91${data.number}`)
+  //   // console.log(res)
+  // };
+  // useEffect(() => {
+  //   // getUserData();
+  // }, [data]);
 
   const handleSendOTP = async () => {
     if (!phoneNumber) {
@@ -34,7 +35,7 @@ const Login = ({ navigation }) => {
       setData(otp);
 
       const accountSid = "AC94273c473bb9659e81543e4e54ea3f22";
-      const authToken = "688ef6a87de50f5695164259e68ca88a";
+      const authToken = "439e2619e22035fc7bf638141d432d90";
       const twilioPhoneNumber = "+17622494652";
       const message = `Your OTP for login is: ${otp}.`;
 
@@ -56,6 +57,7 @@ const Login = ({ navigation }) => {
         setFlag(true);
       } else {
         Alert.alert("Error", "Failed to send OTP.");
+        console.log(error);
       }
     } catch (error) {
       console.error("Error sending OTP:", error);
@@ -106,16 +108,16 @@ const Login = ({ navigation }) => {
       >
         <Text style={{ color: "white", fontSize: 16 }}>Send OTP</Text>
       </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
-      <View style={{ flexDirection: "row", margin: 40, gap: 10 }}>
+      <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
+        <View style={{ flexDirection: "row", margin: 40, gap: 10 }}>
           <Text>Don't have any account?</Text>
           <Text
             style={{ color: COLOURS.blue, textDecorationLine: "underline" }}
           >
             Sign up
           </Text>
-      </View>
-        </TouchableOpacity>
+        </View>
+      </TouchableOpacity>
     </View>
   );
 };

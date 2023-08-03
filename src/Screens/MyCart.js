@@ -5,7 +5,6 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
-  ToastAndroid,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { COLOURS } from "../constants/Theme";
@@ -24,7 +23,6 @@ const MyCart = ({ navigation }) => {
     return unsubscribe;
   }, [navigation]);
 
-  //get data from local DB by ID
   const getDataFromDB = async () => {
     let items = await AsyncStorage.getItem("cartItems");
     items = JSON.parse(items);
@@ -53,8 +51,6 @@ const MyCart = ({ navigation }) => {
     setTotal(total);
   };
 
-  //remove data from Cart
-
   const removeItemFromCart = async (id) => {
     let itemArray = await AsyncStorage.getItem("cartItems");
     itemArray = JSON.parse(itemArray);
@@ -71,11 +67,7 @@ const MyCart = ({ navigation }) => {
     }
   };
 
- 
-
   const checkOut = async () => {
-   
-
     navigation.navigate("Checkout");
   };
 

@@ -6,9 +6,11 @@ import {
   StyleSheet,
   TouchableOpacity,
   ToastAndroid,
+  Alert,
 } from "react-native";
 import { CardField, useConfirmPayment } from "@stripe/stripe-react-native";
 import { COLOURS } from "../constants/Theme";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Checkout = ({ navigation }) => {
   const [cardNumber, setCardNumber] = useState("");
@@ -31,9 +33,9 @@ const Checkout = ({ navigation }) => {
         },
       });
 
-      console.log("Card Payment Successful!", paymentMethod);
+      Alert.alert("Card Payment Successful!", paymentMethod);
     } catch (error) {
-      console.error("Card Payment Error:", error);
+      Alert.alert("Card Payment Error:", error);
     }
   };
   const handleCheckout = async () => {
@@ -57,6 +59,10 @@ const Checkout = ({ navigation }) => {
 
   const handleCashOnDeliveryPayment = () => {
     setSelectedPaymentOption("cashOnDelivery");
+    ToastAndroid.show(
+      "Cash on Delivery is not available for this item",
+      ToastAndroid.SHORT
+    );
   };
 
   const renderPaymentFields = () => {
@@ -73,17 +79,9 @@ const Checkout = ({ navigation }) => {
           <Text style={styles.label}>Account No.</Text>
           <TextInput style={styles.input} placeholder="Enter Account No." />
           <Text style={styles.label}>CVV</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Enter CVV"
-            // Add appropriate state and onChange handlers for CVV
-          />
+          <TextInput style={styles.input} placeholder="Enter CVV" />
           <Text style={styles.label}>Expiry Date</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="MM/YY"
-            // Add appropriate state and onChange handlers for Expiry Date
-          />
+          <TextInput style={styles.input} placeholder="MM/YY" />
         </View>
       );
     } else {

@@ -16,12 +16,12 @@ export default function App() {
           headerShown: false,
         }}
       >
-        <Stack.Screen name="Checkout" component={CheckoutScreen} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="MyCart" component={Cart} />
         <Stack.Screen name="ProductInfo" component={ProductInfo} />
         <Stack.Screen name="Signup" component={SignupScreen} />
+        <Stack.Screen name="Checkout" component={CheckoutScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
